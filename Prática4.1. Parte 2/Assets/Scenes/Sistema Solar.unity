@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 51506159}
   - component: {fileID: 51506158}
   - component: {fileID: 51506157}
+  - component: {fileID: 51506161}
   m_Layer: 0
   m_Name: Saturno
   m_TagString: Untagged
@@ -227,6 +228,22 @@ Transform:
   - {fileID: 1251643742}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &51506161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51506156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584579d61e747d74980c80c05230e4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sol: {fileID: 1177356069}
+  planeta: {fileID: 51506156}
+  velocidadAngular: 100
+  distanceScale: 2.5
 --- !u!1 &233684979
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +256,7 @@ GameObject:
   - component: {fileID: 233684982}
   - component: {fileID: 233684981}
   - component: {fileID: 233684980}
+  - component: {fileID: 233684984}
   m_Layer: 0
   m_Name: Jupiter
   m_TagString: Untagged
@@ -334,6 +352,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &233684984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233684979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584579d61e747d74980c80c05230e4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sol: {fileID: 1177356069}
+  planeta: {fileID: 233684979}
+  velocidadAngular: 100
+  distanceScale: 2
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +473,7 @@ GameObject:
   - component: {fileID: 827340823}
   - component: {fileID: 827340822}
   - component: {fileID: 827340821}
+  - component: {fileID: 827340825}
   m_Layer: 0
   m_Name: Marte
   m_TagString: Untagged
@@ -534,6 +569,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &827340825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827340820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584579d61e747d74980c80c05230e4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sol: {fileID: 1177356069}
+  planeta: {fileID: 827340820}
+  velocidadAngular: 100
+  distanceScale: 1.5
 --- !u!1 &893999191
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +597,7 @@ GameObject:
   - component: {fileID: 893999194}
   - component: {fileID: 893999193}
   - component: {fileID: 893999192}
+  - component: {fileID: 893999196}
   m_Layer: 0
   m_Name: Urano
   m_TagString: Untagged
@@ -641,6 +693,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &893999196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893999191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584579d61e747d74980c80c05230e4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sol: {fileID: 1177356069}
+  planeta: {fileID: 893999191}
+  velocidadAngular: 100
+  distanceScale: 3
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,6 +920,7 @@ GameObject:
   - component: {fileID: 1211151273}
   - component: {fileID: 1211151272}
   - component: {fileID: 1211151271}
+  - component: {fileID: 1211151275}
   m_Layer: 0
   m_Name: Mercurio
   m_TagString: Untagged
@@ -947,6 +1016,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1211151275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211151270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584579d61e747d74980c80c05230e4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sol: {fileID: 1177356069}
+  planeta: {fileID: 1211151270}
+  velocidadAngular: 100
+  distanceScale: 0.4
 --- !u!1 &1251643741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +1151,7 @@ GameObject:
   - component: {fileID: 1736388770}
   - component: {fileID: 1736388769}
   - component: {fileID: 1736388768}
+  - component: {fileID: 1736388772}
   m_Layer: 0
   m_Name: Venus
   m_TagString: Untagged
@@ -1161,6 +1247,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1736388772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736388767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584579d61e747d74980c80c05230e4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sol: {fileID: 1177356069}
+  planeta: {fileID: 1736388767}
+  velocidadAngular: 100
+  distanceScale: 0.7
 --- !u!1 &1856583099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1275,7 @@ GameObject:
   - component: {fileID: 1856583102}
   - component: {fileID: 1856583101}
   - component: {fileID: 1856583100}
+  - component: {fileID: 1856583104}
   m_Layer: 0
   m_Name: Tierra
   m_TagString: Untagged
@@ -1268,6 +1371,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1856583104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856583099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584579d61e747d74980c80c05230e4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sol: {fileID: 1177356069}
+  planeta: {fileID: 1856583099}
+  velocidadAngular: 100
+  distanceScale: 1
 --- !u!1 &1921688197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,7 +1439,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921688197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4c4d06596137b04d89bf86845015b1c, type: 3}
   m_Name: 
@@ -1348,6 +1467,7 @@ GameObject:
   - component: {fileID: 1947417257}
   - component: {fileID: 1947417256}
   - component: {fileID: 1947417255}
+  - component: {fileID: 1947417259}
   m_Layer: 0
   m_Name: Neptuno
   m_TagString: Untagged
@@ -1443,6 +1563,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1947417259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947417254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 584579d61e747d74980c80c05230e4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sol: {fileID: 1177356069}
+  planeta: {fileID: 1947417254}
+  velocidadAngular: 100
+  distanceScale: 3.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
