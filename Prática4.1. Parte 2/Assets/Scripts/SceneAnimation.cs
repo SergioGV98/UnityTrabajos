@@ -25,15 +25,14 @@ public class SceneAnimation : MonoBehaviour
         //Sol
         sol.transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
 
-        //Planetas
-        RotatePlanet(mercurio, 0.4f);
-        RotatePlanet(venus, 0.7f);
-        RotatePlanet(tierra, 1.0f);
-        RotatePlanet(marte, 1.5f);
-        RotatePlanet(jupiter, 2.0f);
-        RotatePlanet(saturno, 2.5f);
-        RotatePlanet(urano, 3.0f);
-        RotatePlanet(neptuno, 3.5f);
+        RotatePlanet(mercurio, 3.5f);
+        RotatePlanet(venus, 3.0f);
+        RotatePlanet(tierra, 2.5f);
+        RotatePlanet(marte, 2.0f);
+        RotatePlanet(jupiter, 1.5f);
+        RotatePlanet(saturno, 1.0f);
+        RotatePlanet(urano, 0.7f);
+        RotatePlanet(neptuno, 0.4f);
     }
 
     void RotatePlanet(GameObject planet, float distanceScale)
