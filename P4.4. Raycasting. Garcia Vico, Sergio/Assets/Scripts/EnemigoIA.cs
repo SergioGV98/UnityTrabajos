@@ -11,55 +11,50 @@ public class EnemigoIA : MonoBehaviour
     }
 
     private EstadoEnemigo estado = EstadoEnemigo.Parado;
-
-    public float angMinimo = -30f;
-    public float angMaximo = 30f;
-    public float vAngular = 150f;
-    public int direccion = 1;
-
-    private float anguloActual = 0f;
-    Vector3 originalPos;
+    private RotadorExtremidades[] rotadores;
 
     void Start()
     {
-        if (direccion == 0)
-        {
-            direccion = -1;
-        }
-        originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        rotadores = GetComponentsInChildren<RotadorExtremidades>();
     }
 
     void Update()
     {
+        Ray rayo = new Ray(transform.position + new Vector3(0, 1, 0) + transform.forward, transform.forward);
+        Debug.DrawRay(rayo.origin, rayo.direction, Color.red);
+
+        RaycastHit hit;
+        if (Physics.SphereCast(rayo, 0.1f, out hit))
+        {
+            Vector3 hitPoint = hit.point;
+            Debug.DrawLine(Vector3.Reflect(transform.forward, hitPoint), Vector3.forward);
+        }
+
         if (estado == EstadoEnemigo.Andando)
         {
-            StartAnimation();
+            IniciarAnimacion();
         }
         else
         {
-            StopAnimation();
+            PararAnimacion();
         }
     }
 
-    public void StartAnimation()
+   private void IniciarAnimacion()
     {
-
-        anguloActual += vAngular * direccion * Time.deltaTime;
-
-        if (anguloActual > angMaximo || anguloActual < angMinimo)
+        foreach (var item in rotadores)
         {
-            direccion = -direccion;
-            anguloActual = Mathf.Clamp(anguloActual, angMinimo, angMaximo);
+            item.StartAnimation();
         }
-
-        transform.localEulerAngles = new Vector3(anguloActual, transform.localEulerAngles.y, transform.localEulerAngles.z);
-
     }
 
-    public void StopAnimation()
+    private void PararAnimacion()
     {
-        transform.position = originalPos;
-
+        foreach (var item in rotadores)
+        {
+            item.StopAnimation();
+        }
     }
+
 
 }
