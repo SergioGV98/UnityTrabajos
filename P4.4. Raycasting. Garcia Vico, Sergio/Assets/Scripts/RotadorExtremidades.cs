@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotadorExtremidadesPlayer : MonoBehaviour
+public class RotadorExtremidades : MonoBehaviour
 {
     public float angMinimo = -30f;
     public float angMaximo = 30f;
@@ -10,8 +10,6 @@ public class RotadorExtremidadesPlayer : MonoBehaviour
     public int direccion = 1;
 
     private float anguloActual = 0f;
-    private Vector3 originalPos;
-    private Quaternion originalRot;
 
     void Start()
     {
@@ -19,24 +17,9 @@ public class RotadorExtremidadesPlayer : MonoBehaviour
         {
             direccion = -1;
         }
-
-        originalPos = transform.position;
-        originalRot = transform.rotation;
     }
 
     void Update()
-    {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
-        {
-            StartAnimation();
-        }
-        else
-        {
-            StopAnimation();
-        }
-    }
-
-    public void StartAnimation()
     {
         anguloActual += vAngular * direccion * Time.deltaTime;
 
@@ -47,11 +30,5 @@ public class RotadorExtremidadesPlayer : MonoBehaviour
         }
 
         transform.localEulerAngles = new Vector3(anguloActual, transform.localEulerAngles.y, transform.localEulerAngles.z);
-    }
-
-    public void StopAnimation()
-    {
-        transform.position = originalPos;
-        transform.rotation = originalRot;
     }
 }
