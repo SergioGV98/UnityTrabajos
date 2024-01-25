@@ -21,14 +21,23 @@ public class EnemigoIA : MonoBehaviour
     void Update()
     {
         Ray rayo = new Ray(transform.position + new Vector3(0, 1, 0) + transform.forward, transform.forward);
-        Debug.DrawRay(rayo.origin, rayo.direction, Color.red);
 
         RaycastHit hit;
-        if (Physics.SphereCast(rayo, 0.1f, out hit))
-        {
-            Vector3 hitPoint = hit.point;
-            Debug.DrawLine(Vector3.Reflect(transform.forward, hitPoint), Vector3.forward);
-        }
+
+        // Primer punto de impacto
+        Physics.SphereCast(rayo, 0.25f, out hit);
+        Debug.DrawLine(rayo.origin, hit.point, Color.red);
+
+        // DrawLine desde el punto de impacto hacia adelante
+        Vector3 hitNormal = hit.point + hit.normal * 5;
+        Debug.DrawLine(hit.point, hitNormal, Color.blue);
+
+        // DrawLine reflect del primer punto de impacto
+        Vector3 direccionReflejada = rayo.direction;
+        Vector3 hitReflejado = Vector3.Reflect(direccionReflejada, hit.normal);
+        Debug.DrawLine(hit.point, hit.point + hitReflejado * 5, Color.white);
+
+        transform.LookAt(transform.position + nuevaDireccion * 2);
 
         if (estado == EstadoEnemigo.Andando)
         {
