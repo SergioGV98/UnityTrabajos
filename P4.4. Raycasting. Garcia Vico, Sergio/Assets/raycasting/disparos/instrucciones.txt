@@ -1,0 +1,2 @@
+Asigan el script Enemigo.cs a los enemigos de tu escena. No olvides añadir los enemigos a la capa "Enemy".
+Asigna el script ShooterController.cs al Player.
