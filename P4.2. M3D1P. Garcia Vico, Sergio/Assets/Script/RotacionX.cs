@@ -4,22 +4,32 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class RotacionX : MonoBehaviour
-
 {
-    private float i = 0;
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private float velocidadRotacion = 30f;
+    [SerializeField]
+    private float limiteRotacionX = 50f;
+    private bool subiendo = true;
 
     void Update()
     {
-        if(transform.rotation.x < 40)
+        Vector3 rotacionActual = transform.rotation.eulerAngles;
+
+        if (subiendo && transform.rotation.eulerAngles.x < limiteRotacionX)
         {
-            transform.rotation = Quaternion.Euler(i++, 0, 0);
-        } else if (transform.rotation.x > -40)
-        {
-            transform.rotation = Quaternion.Euler(i--, 0, 0);
+            rotacionActual.x += velocidadRotacion * Time.deltaTime;
         }
+        else
+        {
+            subiendo = false;
+            rotacionActual.x -= velocidadRotacion * Time.deltaTime;
+
+            if (rotacionActual.x <= 0.0f)
+            {
+                subiendo = true;
+                rotacionActual.x = 0.0f;
+            }
+        }
+        transform.rotation = Quaternion.Euler(rotacionActual);
     }
 }
