@@ -10,7 +10,8 @@ public class RotadorExtremidades : MonoBehaviour
     public int direccion = 1;
 
     private float anguloActual = 0f;
-    Vector3 originalPos;
+    private Vector3 originalLocalPosition;
+    private Quaternion originalLocalRotation;
 
     void Start()
     {
@@ -18,12 +19,14 @@ public class RotadorExtremidades : MonoBehaviour
         {
             direccion = -1;
         }
-        originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+        originalLocalPosition = transform.localPosition;
+        originalLocalRotation = transform.localRotation;
     }
 
     void Update()
     {
-        if (direccion == 0)
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
         {
             StartAnimation();
         }
@@ -35,7 +38,6 @@ public class RotadorExtremidades : MonoBehaviour
 
     public void StartAnimation()
     {
-
         anguloActual += vAngular * direccion * Time.deltaTime;
 
         if (anguloActual > angMaximo || anguloActual < angMinimo)
@@ -45,12 +47,11 @@ public class RotadorExtremidades : MonoBehaviour
         }
 
         transform.localEulerAngles = new Vector3(anguloActual, transform.localEulerAngles.y, transform.localEulerAngles.z);
-
     }
 
     public void StopAnimation()
     {
-        transform.position = originalPos;
-
+        transform.localPosition = originalLocalPosition;
+        transform.localRotation = originalLocalRotation;
     }
 }

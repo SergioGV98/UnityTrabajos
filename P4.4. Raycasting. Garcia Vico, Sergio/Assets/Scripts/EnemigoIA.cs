@@ -10,9 +10,8 @@ public class EnemigoIA : MonoBehaviour
         Andando = 1
     }
 
-    private EstadoEnemigo estado = EstadoEnemigo.Andando;
+    private EstadoEnemigo estado = EstadoEnemigo.Parado;
     private RotadorExtremidades[] rotadores;
-    private Vector3 direccionMovimiento;
 
     void Start()
     {
@@ -38,16 +37,24 @@ public class EnemigoIA : MonoBehaviour
         Vector3 hitReflejado = Vector3.Reflect(direccionReflejada, hit.normal);
         Debug.DrawLine(hit.point, hit.point + hitReflejado * 5, Color.white);
 
-        transform.LookAt(transform.position + direccionReflejada * 2);
+        float distanciaAlPuntoDeImpacto = Vector3.Distance(transform.position, hit.point);
 
-
-        if (estado == EstadoEnemigo.Andando)
+        if (distanciaAlPuntoDeImpacto > 2.5f)
         {
-            IniciarAnimacion();
-        }
-        else
+            estado = EstadoEnemigo.Andando;
+            if (estado == EstadoEnemigo.Andando)
+            {
+                IniciarAnimacion();
+                transform.position = Vector3.Lerp(transform.position, hit.point, Time.deltaTime * 0.5f);
+            }
+        } else
         {
-            PararAnimacion();
+            estado = EstadoEnemigo.Parado;
+            if (estado == EstadoEnemigo.Parado)
+            {
+                PararAnimacion();
+                hit.point = hitReflejado;
+            }
         }
 
     }
