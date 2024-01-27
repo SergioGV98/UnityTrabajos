@@ -10,8 +10,8 @@ public class RotadorExtremidadesPlayer : MonoBehaviour
     public int direccion = 1;
 
     private float anguloActual = 0f;
-    private Vector3 originalPos;
-    private Quaternion originalRot;
+    private Vector3 originalLocalPosition;
+    private Quaternion originalLocalRotation;
 
     void Start()
     {
@@ -20,8 +20,8 @@ public class RotadorExtremidadesPlayer : MonoBehaviour
             direccion = -1;
         }
 
-        originalPos = transform.position;
-        originalRot = transform.rotation;
+        originalLocalPosition = transform.localPosition;
+        originalLocalRotation = transform.localRotation;
     }
 
     void Update()
@@ -51,7 +51,7 @@ public class RotadorExtremidadesPlayer : MonoBehaviour
 
     public void StopAnimation()
     {
-        transform.position = originalPos;
-        transform.rotation = originalRot;
+        transform.localPosition = originalLocalPosition;
+        transform.localRotation = originalLocalRotation;
     }
 }
