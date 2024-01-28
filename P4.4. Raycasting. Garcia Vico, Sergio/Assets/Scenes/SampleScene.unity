@@ -414,13 +414,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1542316515}
+  - component: {fileID: 1542316518}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1542316515
 Transform:
   m_ObjectHideFlags: 0
@@ -438,6 +439,19 @@ Transform:
   - {fileID: 2119820020}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1542316518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542316514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7a12d21b1ef9a47871039a4fe0509f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotMarkPrefab: {fileID: 8585422258939985788, guid: 419c8c5ea77523c45acf15068df0559d, type: 3}
 --- !u!1001 &1637586078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -562,6 +576,10 @@ PrefabInstance:
     - target: {fileID: 2889418127155714674, guid: cc0640aa323b8164099c2171a94e544f, type: 3}
       propertyPath: m_Name
       value: Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 2889418127155714674, guid: cc0640aa323b8164099c2171a94e544f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4175439161050322043, guid: cc0640aa323b8164099c2171a94e544f, type: 3}
       propertyPath: direccion
