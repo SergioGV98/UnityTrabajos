@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemigoIA : MonoBehaviour
@@ -12,10 +13,13 @@ public class EnemigoIA : MonoBehaviour
 
     private EstadoEnemigo estado = EstadoEnemigo.Parado;
     private RotadorExtremidades[] rotadores;
+    private CharacterController character;
+    public float speed;
 
     void Start()
     {
         rotadores = GetComponentsInChildren<RotadorExtremidades>();
+        SetRandomOrientation();
     }
 
     void Update()
@@ -57,7 +61,11 @@ public class EnemigoIA : MonoBehaviour
             }
         }
 
+        //character.Move(new Vector3(0, 10 * Time.deltaTime, 0));
+        //character.Move(transformDirection(Vector3.forward) * speed * Time.deltaTime);
+
     }
+
 
     private void IniciarAnimacion()
     {
@@ -65,6 +73,11 @@ public class EnemigoIA : MonoBehaviour
         {
             item.StartAnimation();
         }
+    }
+
+    public void SetRandomOrientation()
+    {
+        transform.localEulerAngles = new Vector3(0, Random.Range(0, 300), 0);
     }
 
     private void PararAnimacion()
