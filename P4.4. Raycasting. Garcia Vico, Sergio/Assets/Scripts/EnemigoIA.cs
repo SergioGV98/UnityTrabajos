@@ -13,7 +13,6 @@ public class EnemigoIA : MonoBehaviour
 
     private EstadoEnemigo estado = EstadoEnemigo.Parado;
     private RotadorExtremidades[] rotadores;
-    private CharacterController character;
     public float speed;
 
     void Start()
@@ -28,11 +27,9 @@ public class EnemigoIA : MonoBehaviour
 
         RaycastHit hit;
 
-        // Primer punto de impacto
         Physics.SphereCast(rayo, 0.25f, out hit);
         Debug.DrawLine(rayo.origin, hit.point, Color.red);
 
-        // DrawLine desde el punto de impacto hacia adelante
         Vector3 hitNormal = hit.point + hit.normal * 5;
         Debug.DrawLine(hit.point, hitNormal, Color.blue);
 
