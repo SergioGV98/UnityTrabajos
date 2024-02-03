@@ -36,7 +36,6 @@ public class EnemigoIA : MonoBehaviour
         Vector3 hitNormal = hit.point + hit.normal * 5;
         Debug.DrawLine(hit.point, hitNormal, Color.blue);
 
-        // DrawLine reflect del primer punto de impacto
         Vector3 direccionReflejada = rayo.direction;
         Vector3 hitReflejado = Vector3.Reflect(direccionReflejada, hit.normal);
         Debug.DrawLine(hit.point, hit.point + hitReflejado * 5, Color.white);
@@ -57,13 +56,9 @@ public class EnemigoIA : MonoBehaviour
             if (estado == EstadoEnemigo.Parado)
             {
                 PararAnimacion();
-                hit.point = hitReflejado;
+                transform.rotation = Quaternion.LookRotation(hitReflejado.normalized);
             }
         }
-
-        //character.Move(new Vector3(0, 10 * Time.deltaTime, 0));
-        //character.Move(transformDirection(Vector3.forward) * speed * Time.deltaTime);
-
     }
 
 
