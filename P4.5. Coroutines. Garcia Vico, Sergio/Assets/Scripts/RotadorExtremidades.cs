@@ -4,54 +4,43 @@ using UnityEngine;
 
 public class RotadorExtremidades : MonoBehaviour
 {
-    public float angMinimo = -30f;
-    public float angMaximo = 30f;
-    public float vAngular = 150f;
-    public int direccion = 1;
+    float xAngle = 0;
+    public float dir = 1;
+    public float limit = 30f;
+    public float velocity = 600f;
 
-    private float anguloActual = 0f;
-    private Vector3 originalLocalPosition;
-    private Quaternion originalLocalRotation;
+    bool bAnimationStarted = false;
 
+    // Start is called before the first frame update
     void Start()
     {
-        if (direccion == 0)
-        {
-            direccion = -1;
-        }
-
-        originalLocalPosition = transform.localPosition;
-        originalLocalRotation = transform.localRotation;
     }
 
+    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
-        {
-            StartAnimation();
-        }
-        else
-        {
-            StopAnimation();
-        }
+        if (bAnimationStarted) DoAnimation();
+    }
+
+    void DoAnimation()
+    {
+        if (xAngle > 30) dir = -1;
+        if (xAngle < -30) dir = 1;
+
+        xAngle += velocity * Time.deltaTime * dir;
+
+        transform.localEulerAngles = new Vector3(xAngle, 0, 0);
     }
 
     public void StartAnimation()
     {
-        anguloActual += vAngular * direccion * Time.deltaTime;
-
-        if (anguloActual > angMaximo || anguloActual < angMinimo)
-        {
-            direccion = -direccion;
-            anguloActual = Mathf.Clamp(anguloActual, angMinimo, angMaximo);
-        }
-
-        transform.localEulerAngles = new Vector3(anguloActual, transform.localEulerAngles.y, transform.localEulerAngles.z);
+        bAnimationStarted = true;
     }
 
     public void StopAnimation()
     {
-        transform.localPosition = originalLocalPosition;
-        transform.localRotation = originalLocalRotation;
+        bAnimationStarted = false;
+        xAngle = 0;
+        transform.localEulerAngles = new Vector3(0, 0, 0);
     }
 }

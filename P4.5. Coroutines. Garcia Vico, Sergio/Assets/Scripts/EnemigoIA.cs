@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using System.Collections;
 
 public class EnemigoIA : MonoBehaviour
 {
@@ -11,72 +9,120 @@ public class EnemigoIA : MonoBehaviour
         Andando = 1
     }
 
+    public RotadorExtremidades[] rotadores;
+    public RotadorCabeza rotadorCabeza;
     private EstadoEnemigo estado = EstadoEnemigo.Parado;
-    private RotadorExtremidades[] rotadores;
     public float speed;
+    bool bMuriendo = false;
+    bool bMuerto = false;
+    bool bInicioMovimiento = false;
 
     void Start()
     {
-        rotadores = GetComponentsInChildren<RotadorExtremidades>();
-        SetRandomOrientation();
+        StartCoroutine(StartMovingAfterDelay());
+    }
+
+    IEnumerator StartMovingAfterDelay()
+    {
+        yield return new WaitForSeconds(FindAnyObjectByType<EnemySpawner>().initialDelay);
+
+        bInicioMovimiento = true;
     }
 
     void Update()
     {
+        if (!bInicioMovimiento)
+            return;
+
         Ray rayo = new Ray(transform.position + new Vector3(0, 1, 0) + transform.forward, transform.forward);
 
         RaycastHit hit;
 
-        Physics.SphereCast(rayo, 0.25f, out hit);
-        Debug.DrawLine(rayo.origin, hit.point, Color.red);
-
-        Vector3 hitNormal = hit.point + hit.normal * 5;
-        Debug.DrawLine(hit.point, hitNormal, Color.blue);
-
-        Vector3 direccionReflejada = rayo.direction;
-        Vector3 hitReflejado = Vector3.Reflect(direccionReflejada, hit.normal);
-        Debug.DrawLine(hit.point, hit.point + hitReflejado * 5, Color.white);
-
-        float distanciaAlPuntoDeImpacto = Vector3.Distance(transform.position, hit.point);
-
-        if (distanciaAlPuntoDeImpacto > 2.5f)
+        if (Physics.Raycast(rayo, out hit, Mathf.Infinity, LayerMask.GetMask("Walls")))
         {
-            estado = EstadoEnemigo.Andando;
-            if (estado == EstadoEnemigo.Andando)
+            Debug.DrawLine(rayo.origin, hit.point, Color.red);
+
+            Vector3 hitNormal = hit.point + hit.normal * 5;
+            Debug.DrawLine(hit.point, hitNormal, Color.blue);
+
+            Vector3 direccionReflejada = rayo.direction;
+            Vector3 hitReflejado = Vector3.Reflect(direccionReflejada, hit.normal);
+            Debug.DrawLine(hit.point, hit.point + hitReflejado * 5, Color.white);
+
+            float distanciaAlPuntoDeImpacto = Vector3.Distance(transform.position, hit.point);
+
+            if (distanciaAlPuntoDeImpacto > 2.5f)
             {
-                IniciarAnimacion();
-                transform.position = Vector3.Lerp(transform.position, hit.point, Time.deltaTime * 0.5f);
+                estado = EstadoEnemigo.Andando;
+                if (estado == EstadoEnemigo.Andando)
+                {
+                    StartAnimation();
+                    Vector3 directionToTarget = (hit.point - transform.position).normalized;
+                    transform.position += directionToTarget * speed * Time.deltaTime;
+                }
             }
-        } else
-        {
-            estado = EstadoEnemigo.Parado;
-            if (estado == EstadoEnemigo.Parado)
+            else
             {
-                PararAnimacion();
-                transform.rotation = Quaternion.LookRotation(hitReflejado.normalized);
+                estado = EstadoEnemigo.Parado;
+                if (estado == EstadoEnemigo.Parado)
+                {
+                    StopAnimation();
+                    transform.rotation = Quaternion.LookRotation(hitReflejado.normalized);
+                }
             }
         }
     }
 
 
-    private void IniciarAnimacion()
+
+    public void StartAnimation()
     {
-        foreach (var item in rotadores)
+        if(bInicioMovimiento)
         {
-            item.StartAnimation();
+            rotadorCabeza.StartAnimation();
+            foreach (var rotador in rotadores)
+            {
+                rotador.StartAnimation();
+            }
         }
     }
 
-    public void SetRandomOrientation()
+    public void StopAnimation()
     {
-        transform.localEulerAngles = new Vector3(0, Random.Range(0, 300), 0);
+        rotadorCabeza.StopAnimation();
+        foreach (var rotador in rotadores)
+        {
+            rotador.StopAnimation();
+        }
     }
 
-    private void PararAnimacion()
+
+    public void SetTarget(GameObject target)
     {
-        foreach (var item in rotadores)
+        RotadorCabeza rotador = GetComponentInChildren<RotadorCabeza>();
+        rotador.SetTarget(target);
+    }
+
+    public void Muere()
+    {
+        if (!bMuerto && !bMuriendo) 
         {
-            item.StopAnimation();
+            bMuriendo = true;
+            StopAnimation();
+            StartCoroutine(AnimacionCaida());
         }
+    }
+
+
+    private IEnumerator AnimacionCaida()
+    {
+        for (float a = 0; a <= 90; a += 75 * Time.deltaTime)
+        {
+            transform.localEulerAngles = new Vector3(a, 0, 0);
+            yield return null;
+        }
+        bMuriendo = false;
+        bMuerto = true;
+        Destroy(gameObject);
     }
 }
