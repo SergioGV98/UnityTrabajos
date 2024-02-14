@@ -14,7 +14,7 @@ public class MemoryCard : MonoBehaviour
 
     public Vector2 Size{get{return cardBack.sprite.bounds.size;}}
 
-    private void Flip()
+    public void Flip()
     {
         cardBack.gameObject.SetActive(false);
         bIsCurrentlyFlipped = true;

@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,8 @@ public class Controller : MonoBehaviour
     public bool CanFlip { get { return firstCard == null || secondCard == null; } }
     private float startTime;
     private bool gameFinished = false;
+    public TMP_Text scoreTMP;
+    public TMP_Text gameFinishedTMP;
 
     void Start()
     {
@@ -29,10 +32,10 @@ public class Controller : MonoBehaviour
         {
             float elapsedTime = Time.time - startTime;
             Debug.Log("Juego finalizado en: " + elapsedTime.ToString("F2") + " segundos");
-
             StartCoroutine(CountdownRestart());
             gameFinished = true; 
         }
+        scoreTMP.text = "Puntuacion: " + score;
     }
 
 
@@ -144,12 +147,17 @@ public class Controller : MonoBehaviour
         float countdownTime = 5f;
         while (countdownTime > 0)
         {
+            gameFinishedTMP.gameObject.SetActive(true);
             yield return new WaitForSeconds(1f);
             countdownTime -= 1f;
+            gameFinishedTMP.text = "Reiniciando en " + countdownTime.ToString("F2") + " segundos";
             Debug.Log("Reiniciando en " + countdownTime.ToString("F2") + " segundos");
         }
-
+        gameFinishedTMP.gameObject.SetActive(false);
         SceneManager.LoadScene("SampleScene");
     }
 
+
+
 }
+
