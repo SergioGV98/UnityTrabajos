@@ -6,12 +6,16 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
     CapsuleCollider2D capsuleCollider;
+    FixedJoint2D fixedJoint;
+    public Ball ball;
     public float speed = 1.0f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         Cursor.lockState = CursorLockMode.Confined;
+        fixedJoint = GetComponent<FixedJoint2D>();
+        StartCoroutine(LaunchBall());
     }
 
     void Update()
@@ -39,4 +43,13 @@ public class Player : MonoBehaviour
             rb.MovePosition(MousePosition());
         }
     }
+
+    public IEnumerator LaunchBall()
+    {
+        yield return new WaitForSeconds(2f);
+        fixedJoint.enabled = false; 
+        Vector2 launchDirection = rb.velocity.normalized + Vector2.up; 
+        ball.Launch(launchDirection );
+    }
+
 }

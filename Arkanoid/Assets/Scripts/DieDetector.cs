@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class DieDetector : MonoBehaviour
 {
-    // Start is called before the first frame update
+    LevelController levelController;
     void Start()
     {
-        
+        levelController = FindAnyObjectByType<LevelController>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        levelController.OnDie();
     }
 }

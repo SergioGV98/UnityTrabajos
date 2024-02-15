@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7385104258824142148}
   m_Layer: 0
   m_Name: Dyke
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3bbe2d235f447ae4483febe2c3024ceb, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
