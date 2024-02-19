@@ -22,7 +22,7 @@ public class LevelController : MonoBehaviour
         Debug.Log("Score: " + score);
         if(score == brickQuantity)
         {
-            Debug.Log("¡Enhorabuena! ¡Has ganado!");
+            Debug.Log("ï¿½Enhorabuena! ï¿½Has ganado!");
             StartCoroutine(ResetLevel());
         }
     }
@@ -35,13 +35,14 @@ public class LevelController : MonoBehaviour
     IEnumerator ResetLevel()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void OnDie()
     {
         Debug.Log("Has muerto");
         lives--;
+         Debug.Log("Vidas restantes: " + lives);
         if(lives == 0)
         {
             Debug.Log("Perdiste todas las vidas, reiniciando partida...");
@@ -53,7 +54,7 @@ public class LevelController : MonoBehaviour
     }
     IEnumerator RespawnBall()
     {
-        ball.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, player.transform.position.z);
+        ball.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 0.4f, player.transform.position.z);
         player.GetComponent<FixedJoint2D>().enabled = true;
         yield return player.LaunchBall();
     }
