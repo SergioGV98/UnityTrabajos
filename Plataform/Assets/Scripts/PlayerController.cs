@@ -61,7 +61,8 @@ public class PlayerController : MonoBehaviour
         if(dy > 0 && !isJumping)
         {
             rb.AddForceY(jumpImpulse, ForceMode2D.Impulse);
-            isJumping = true; animator.SetBool("isJumping", isJumping);
+            isJumping = true; 
+            animator.SetBool("isJumping", isJumping);
         } 
 
         if(rb.velocityY < 0)
