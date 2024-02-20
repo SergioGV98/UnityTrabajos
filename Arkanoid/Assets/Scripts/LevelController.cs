@@ -54,7 +54,7 @@ public class LevelController : MonoBehaviour
     }
     IEnumerator RespawnBall()
     {
-        ball.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 0.4f, player.transform.position.z);
+        ball.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 0.45f, player.transform.position.z);
         player.GetComponent<FixedJoint2D>().enabled = true;
         yield return player.LaunchBall();
     }
