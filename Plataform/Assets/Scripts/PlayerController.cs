@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float jumpImpulse = 5;
     public float acceleration = 30;
     public float decceleration = 30;
-    bool isJumping = false;
+    GroundDetector gd;
     int dir = 1;
     float velocity = 0;
     Animator animator;
@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        gd = GetComponentInChildren<GroundDetector>();
     }
 
     void FixedUpdate()
@@ -29,6 +30,13 @@ public class PlayerController : MonoBehaviour
         if(dx == 0)
         {
             float delta = decceleration * Time.fixedDeltaTime;
+            if (rb.velocityY != 0)
+            {
+                delta = 0;
+            } else
+            {
+                delta = decceleration * Time.fixedDeltaTime;
+            }
             // Deceleramos el personaje en la direccion contraria a su movimiento
             if(rb.velocityX > 0)
             {
@@ -58,17 +66,9 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(velocity));
         rb.velocityX = velocity;
 
-        if(dy > 0 && !isJumping)
+        if(dy > 0 && gd.IsGrounded)
         {
             rb.AddForceY(jumpImpulse, ForceMode2D.Impulse);
-            isJumping = true; 
-            animator.SetBool("isJumping", isJumping);
         } 
-
-        if(rb.velocityY < 0)
-        {
-            isJumping = false;
-            animator.SetBool("isJumping", isJumping);
-        }
     }
 }

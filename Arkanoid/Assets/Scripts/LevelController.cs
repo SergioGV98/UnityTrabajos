@@ -8,7 +8,7 @@ public class LevelController : MonoBehaviour
     public Player player;
     int score = 0;
     int brickQuantity = 0;
-    int lives = 3;
+    public int lives = 3;
     void Start()
     {
         Brick[] bricks = FindObjectsByType<Brick>(FindObjectsSortMode.None);
