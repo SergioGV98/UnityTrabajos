@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -7,10 +8,11 @@ public class Ball : MonoBehaviour
     Rigidbody2D rb;
     LevelController levelController;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        levelController = FindFirstObjectByType<LevelController>(); 
+        levelController = FindFirstObjectByType<LevelController>();
     }
 
     void Update()
@@ -25,9 +27,26 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Brick")) 
+        if (collision.gameObject.CompareTag("Brick"))
         {
-            levelController.OnBrickCollided(collision.gameObject); 
+            levelController.OnBrickCollided(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Card"))
+        {
+            AplicarEfectoDeCarta(collision.gameObject);
         }
     }
+
+    private void AplicarEfectoDeCarta(GameObject card)
+    {
+        AcelerarPelota acelerarPelota = card.GetComponent<AcelerarPelota>();
+        if (acelerarPelota != null)
+        {
+            speed += 2f; 
+            Destroy(card);
+        }
+    }
+
+
+
 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,7 +7,8 @@ public class Player : MonoBehaviour
     CapsuleCollider2D capsuleCollider;
     FixedJoint2D fixedJoint;
     public Ball ball;
-    public float speed = 1.0f;
+    public float speed = 1f;
+    [SerializeField] public float width = 1f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        gameObject.transform.localScale = new Vector3(width, 1, 1);
+
         if (Input.GetKey(KeyCode.A))
         {
             rb.velocity = Vector2.left * speed;

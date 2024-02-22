@@ -55,6 +55,7 @@ public class LevelController : MonoBehaviour
 
     private void RemoveBrick(GameObject brick)
     {
+        brick.GetComponent<Brick>().DestroyBrick();
         Destroy(brick.transform.gameObject);
     }
 

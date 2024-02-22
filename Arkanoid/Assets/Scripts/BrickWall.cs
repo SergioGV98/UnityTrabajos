@@ -37,7 +37,6 @@ public class BrickWall : MonoBehaviour
             }
         }
 
-        // Informar a LevelController sobre el número total de ladrillos creados
-        GameObject.FindAnyObjectByType<LevelController>().SetBrickQuantity(brickCount);
+        FindAnyObjectByType<LevelController>().SetBrickQuantity(brickCount);
     }
 }
