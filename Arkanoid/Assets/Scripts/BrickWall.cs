@@ -1,19 +1,18 @@
-using UnityEngine;
 
+using UnityEngine;
 
 public class BrickWall : MonoBehaviour
 {
-    public GameObject[] brickVariants; 
-    private int currentColorIndex = 0; 
+    public GameObject[] brickVariants;
+    private int currentColorIndex = 0;
     public int nRows = 5;
-    public int nCols = 5; 
-    public float gap = 1.9f; 
+    public int nCols = 5;
+    public float gap = 1.9f;
     public float heightOffset = 5.0f;
 
     void Start()
     {
-        PlaceBricks(nRows, nCols, gap, heightOffset); 
-
+        PlaceBricks(nRows, nCols, gap, heightOffset);
     }
 
     private void PlaceBricks(int nRows, int nCols, float gap, float heightOffset)
@@ -22,6 +21,7 @@ public class BrickWall : MonoBehaviour
         float totalHeight = nRows * gap;
 
         Vector3 startPos = transform.position - new Vector3(totalWidth / 2f, totalHeight / 2f, 0) + new Vector3(0, heightOffset, 0);
+        int brickCount = 0;
 
         for (int row = 0; row < nRows; row++)
         {
@@ -33,9 +33,11 @@ public class BrickWall : MonoBehaviour
 
                 GameObject brick = Instantiate(brickVariants[currentColorIndex], brickPosition, Quaternion.identity);
                 brick.transform.parent = transform;
+                brickCount++;
             }
         }
+
+        // Informar a LevelController sobre el número total de ladrillos creados
+        GameObject.FindAnyObjectByType<LevelController>().SetBrickQuantity(brickCount);
     }
-
-
 }

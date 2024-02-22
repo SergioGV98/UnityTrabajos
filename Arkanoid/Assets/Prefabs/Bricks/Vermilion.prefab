@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4630766874581978053}
   - component: {fileID: 7256965990406276041}
   - component: {fileID: 733248281706194975}
-  - component: {fileID: 5993548543914301151}
   m_Layer: 0
   m_Name: Vermilion
   m_TagString: Brick
@@ -134,15 +133,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5993548543914301151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8269279144784072311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80f67ecd80e5b8e418cc53a48ecb0e52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

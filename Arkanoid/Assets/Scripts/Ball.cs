@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class Ball : MonoBehaviour
 {
     public float speed = 7f;
@@ -9,7 +10,7 @@ public class Ball : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        levelController = FindAnyObjectByType<LevelController>();
+        levelController = FindFirstObjectByType<LevelController>(); 
     }
 
     void Update()
@@ -24,9 +25,9 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Brick")
+        if (collision.gameObject.CompareTag("Brick")) 
         {
-            levelController.OnBrickCollided(collision.gameObject.GetComponent<Brick>());
+            levelController.OnBrickCollided(collision.gameObject); 
         }
     }
 }
