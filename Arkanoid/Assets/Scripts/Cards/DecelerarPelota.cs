@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class AcelerarPelota : MonoBehaviour
+public class DecelerarPelota : MonoBehaviour
 {
-    public float factorAceleracion = 5f;
-    private bool triggerActivo = false
-        ;
+    public float factorDesceleracion = 2f;
+    private bool triggerActivo = false;
+
     private void Start()
     {
         Invoke("ActivarTrigger", 2f);
@@ -26,6 +26,6 @@ public class AcelerarPelota : MonoBehaviour
 
     public void AplicarEfecto(Ball ball)
     {
-        ball.speed += factorAceleracion;
+        ball.speed -= factorDesceleracion;
     }
 }

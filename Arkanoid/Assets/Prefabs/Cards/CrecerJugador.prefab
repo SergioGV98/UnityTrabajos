@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3296377150395840165}
   - component: {fileID: -4087447653975096760}
   - component: {fileID: -582236317736044748}
-  - component: {fileID: 4979524206490442182}
+  - component: {fileID: 1139724731282425484}
   m_Layer: 0
-  m_Name: AcelerarPelota
+  m_Name: CrecerJugador
   m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 101260642808618450}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1286, y: -6.285, z: 0}
+  m_LocalPosition: {x: -1.3033873, y: -4.9972386, z: 0}
   m_LocalScale: {x: 0.54383475, y: 0.87842226, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -163,7 +163,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4979524206490442182
+--- !u!114 &1139724731282425484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,10 +172,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 101260642808618450}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c735ec5b516b80c41a441dab6c2d36d7, type: 3}
+  m_Script: {fileID: 11500000, guid: a47832f4803e69f498ac7b090d17dd62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  factorAceleracion: 3
+  factorCrecer: 0.3
 --- !u!1 &1339014882708847234
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +251,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4462707318025259509, guid: 60242529f4ae39e409fc2646596733ee, type: 3}
+  m_Sprite: {fileID: -6924088554093437319, guid: 869b307e7fcb0b948b83cc3b8ac817b6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

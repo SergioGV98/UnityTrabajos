@@ -20,6 +20,7 @@ public class Ball : MonoBehaviour
         rb.velocity = rb.velocity.normalized * speed;
     }
 
+
     public void Launch(Vector2 dir)
     {
         rb.velocity = dir.normalized * speed;
@@ -31,22 +32,6 @@ public class Ball : MonoBehaviour
         {
             levelController.OnBrickCollided(collision.gameObject);
         }
-        else if (collision.gameObject.CompareTag("Card"))
-        {
-            AplicarEfectoDeCarta(collision.gameObject);
-        }
     }
-
-    private void AplicarEfectoDeCarta(GameObject card)
-    {
-        AcelerarPelota acelerarPelota = card.GetComponent<AcelerarPelota>();
-        if (acelerarPelota != null)
-        {
-            speed += 2f; 
-            Destroy(card);
-        }
-    }
-
-
 
 }

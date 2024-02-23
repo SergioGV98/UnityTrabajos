@@ -13,6 +13,9 @@ public class DieDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        levelController.OnDie();
+        if (collision.CompareTag("Ball"))
+        {
+            levelController.OnDie();
+        }
     }
 }

@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class AcelerarPelota : MonoBehaviour
+public class AcelerarJugador : MonoBehaviour
 {
-    public float factorAceleracion = 5f;
-    private bool triggerActivo = false
-        ;
+    public float factorAceleracion = 3f;
+    private bool triggerActivo = false;
+
     private void Start()
     {
         Invoke("ActivarTrigger", 2f);
@@ -14,7 +14,7 @@ public class AcelerarPelota : MonoBehaviour
     {
         if (triggerActivo && collision.gameObject.CompareTag("Ball"))
         {
-            AplicarEfecto(collision.gameObject.GetComponent<Ball>());
+            AplicarEfecto(FindAnyObjectByType<Player>());
             Destroy(gameObject);
         }
     }
@@ -24,8 +24,8 @@ public class AcelerarPelota : MonoBehaviour
         triggerActivo = true;
     }
 
-    public void AplicarEfecto(Ball ball)
+    public void AplicarEfecto(Player player)
     {
-        ball.speed += factorAceleracion;
+        player.speed += factorAceleracion;
     }
 }

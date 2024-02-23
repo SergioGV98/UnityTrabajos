@@ -20,7 +20,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        gameObject.transform.localScale = new Vector3(width, 1, 1);
+        if(gameObject.transform.localScale.x < 0.1f)
+        {
+            width = 0.1f;
+            gameObject.transform.localScale = new Vector3(0.1f, 1, 1);
+        } else
+        {
+            gameObject.transform.localScale = new Vector3(width, 1, 1);
+
+        }
 
         if (Input.GetKey(KeyCode.A))
         {

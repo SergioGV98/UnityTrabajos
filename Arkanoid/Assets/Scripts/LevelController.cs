@@ -13,9 +13,13 @@ public class LevelController : MonoBehaviour
     public float timeLimit = 180f; 
     private float currentTime;
     public TextMeshProUGUI timer;
+    public TextMeshProUGUI messageFinal;
+
+    private Vector3 initialPlayerPosition;
 
     void Start()
     {
+        initialPlayerPosition = player.transform.position;
         currentTime = timeLimit;
         StartCoroutine(CountdownTimer());
     }
@@ -48,6 +52,8 @@ public class LevelController : MonoBehaviour
         Debug.Log("Bricks restantes " + brickQuantity);
         if (brickQuantity == 0)
         {
+            messageFinal.text = "¡Enhorabuena! ¡Has ganado!";
+            messageFinal.gameObject.SetActive(true);
             Debug.Log("¡Enhorabuena! ¡Has ganado!");
             StartCoroutine(ResetLevel());
         }
@@ -62,6 +68,7 @@ public class LevelController : MonoBehaviour
     IEnumerator ResetLevel()
     {
         yield return new WaitForSeconds(2f);
+        messageFinal.gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -73,6 +80,8 @@ public class LevelController : MonoBehaviour
         if (lives == 0)
         {
             Debug.Log("Perdiste todas las vidas, reiniciando partida...");
+            messageFinal.text = "Perdiste todas las vidas, reiniciando partida...";
+            messageFinal.gameObject.SetActive(true);
             StartCoroutine(ResetLevel());
         }
         else
@@ -83,8 +92,21 @@ public class LevelController : MonoBehaviour
 
     IEnumerator RespawnBall()
     {
-        ball.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 0.45f, player.transform.position.z);
+ 
+        player.transform.position = initialPlayerPosition;
+
+        Vector3 respawnPosition = new Vector3(player.transform.position.x, player.transform.position.y + 0.45f, player.transform.position.z);
+
+        if (Mathf.Abs(ball.transform.position.y - respawnPosition.y) < 0.1f)
+        {
+            respawnPosition.y += 0.45f; 
+        }
+
+        ball.transform.position = respawnPosition;
+
         player.GetComponent<FixedJoint2D>().enabled = true;
+
         yield return player.LaunchBall();
     }
+
 }
