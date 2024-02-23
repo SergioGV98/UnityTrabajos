@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public enum EjesRotacion
+public enum RotationMode
 {
     MouseX,
     MouseY,
@@ -11,39 +9,48 @@ public enum EjesRotacion
 
 public class RotationController : MonoBehaviour
 {
-    [Range(0, 800)]
-    public float velocidadRotacion = 320f;
+    public float rotationVelocity = 700;
+    public float speed = 10;
 
-    public EjesRotacion modoRotacion = EjesRotacion.MouseXY;
-    public float rotacionXMin = -90f; 
-    public float rotacionXMax = 90f;  
+    private float xAxis = 0;
+    private float yAxis = 0;
 
+
+    public RotationMode rotationMode = RotationMode.MouseXY;
     void Start()
     {
-        Debug.Log("Coordenadas" + transform.position);
-        Debug.Log("Orientacion" + transform.rotation);
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        xAxis = transform.localEulerAngles.x;
+        yAxis = transform.localEulerAngles.y;
     }
 
     void Update()
     {
-        float movimientoRatonY = Input.GetAxis("Mouse Y");
-        float movimientoRatonX = Input.GetAxis("Mouse X");
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
 
-        float incRotacionX = 0f;
-        float incRotacionY = 0f;
+        Vector3 rotation;
 
-        if (modoRotacion == EjesRotacion.MouseX || modoRotacion == EjesRotacion.MouseXY)
+        xAxis -= mouseY * rotationVelocity * Time.deltaTime;
+        xAxis = Mathf.Clamp(xAxis, -90, 90);
+        yAxis += mouseX * rotationVelocity * Time.deltaTime;
+
+        switch (rotationMode)
         {
-            incRotacionY = movimientoRatonX * velocidadRotacion * Time.deltaTime;
+            case RotationMode.MouseX:
+                rotation = new Vector3(0, yAxis, 0);
+                break;
+            case RotationMode.MouseY:
+                rotation = new Vector3(xAxis, 0, 0);
+                break;
+            default:
+                rotation = new Vector3(xAxis, yAxis, 0);
+                break;
         }
 
-        if (modoRotacion == EjesRotacion.MouseY || modoRotacion == EjesRotacion.MouseXY)
-        {
-            incRotacionX = -movimientoRatonY * velocidadRotacion * Time.deltaTime;
-            incRotacionX = Mathf.Clamp(incRotacionX, rotacionXMin, rotacionXMax); 
-        }
-
-        transform.localEulerAngles += new Vector3(incRotacionX, incRotacionY, 0);
+        transform.localEulerAngles = rotation;
     }
+
 }

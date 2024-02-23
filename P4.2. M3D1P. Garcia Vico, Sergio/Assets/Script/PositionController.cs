@@ -1,36 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class PositionController : MonoBehaviour
 {
-    [Range(0, 20)]
+    private CharacterController characterControler;
     public float speed = 10;
-    public float velocidadSalto = 2f;
-    public float gravedad = 9.8f;
-    private CharacterController characterController;
+    float speedVertical = -10;
+
+    public float jump = 3.5f;
+    public float fallSpeedLimit = 20;
+    public float gravity = -10;
+    private bool isGrounded = false;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        characterControler = GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput) * speed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.Space))
-        {
-            movement = new Vector3(horizontalInput, velocidadSalto, verticalInput) * speed * Time.deltaTime;
-        } else if (Input.GetKey(KeyCode.LeftShift))
-        {
-            //movement = new Vector3(horizontalInput, -velocidadSalto, verticalInput) * speed * Time.deltaTime;
-            movement.y -= gravedad * Time.deltaTime;
-        }
-        characterController.Move(movement);
-
-        Debug.Log("Horizontal: " + horizontalInput + ", Vertical: " + verticalInput);
+        movementController();
+        jumpController();
     }
+
+    void jumpController()
+    {
+        if (Input.GetKey(KeyCode.Space) && isGrounded)
+        {
+            speedVertical = jump;
+        }
+        else if (speedVertical > -fallSpeedLimit)
+        {
+            speedVertical = speedVertical + gravity * Time.deltaTime;
+            if (speedVertical < -fallSpeedLimit)
+            {
+                speedVertical = -fallSpeedLimit;
+            }
+        }
+        characterControler.Move(new Vector3(0, speedVertical, 0) * speed / 2 * Time.deltaTime);
+        isGrounded = characterControler.isGrounded;
+    }
+
+    void movementController()
+    {
+        float xAxis = Input.GetAxis("Horizontal");
+        float yAxis = Input.GetAxis("Vertical");
+
+        Vector3 direction = new Vector3(xAxis, 0, yAxis);
+        characterControler.Move(transform.TransformDirection(direction * speed * Time.deltaTime));
+
+    }
+
 }
